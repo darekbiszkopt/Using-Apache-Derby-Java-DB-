@@ -38,7 +38,8 @@ public class Database {
         }
 
         try {
-            connection.createStatement().execute("CREATE TABLE Oferta("
+            connection.createStatement()
+                    .execute("CREATE TABLE Oferta("
                     + "id int PRIMARY KEY, "
                     + "kraj varchar(40), "
                     + "data_wyjazdu Date, "
@@ -48,7 +49,8 @@ public class Database {
                     + "symbol_waluty varchar(10))"
             );
 
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO Oferta VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pstmt = connection
+                    .prepareStatement("INSERT INTO Oferta VALUES(?,?,?,?,?,?,?)");
             for (String line : travelData.getResList()) {
                 String[] tokens = line.split("\\t");
 
@@ -61,11 +63,6 @@ public class Database {
                 pstmt.setString(6, tokens[4]);
                 pstmt.setString(7, tokens[5]);
                 pstmt.executeUpdate();
-
-				/*connection.createStatement().execute(
-						"INSERT INTO Oferta(id, kraj, data_wyjazdu, data_powrotu, miejsce, cena, symbol_waluty) VALUES "
-						+ "("+id+", "+"'"+tokens[0]+"', " + "'"+tokens[1]+"', " + "'"+tokens[2]+"', " + "'"+tokens[3]+"'," + "'"+tokens[4]+"', " + "'"+tokens[5]+"')"
-						);*/
             }
 
         } catch (SQLException e) {

@@ -71,7 +71,7 @@ public class Database {
         }
     }
 
-    public void show() {
+    public void showGui() {
         Statement statment;
 
         try {
